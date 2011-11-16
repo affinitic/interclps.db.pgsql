@@ -314,6 +314,7 @@ class InterClpsModel(object):
                            'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True)})
                            #'institution_ressource': relation(LinkExperienceInstitutionRessource, lazy=True),
                            #'ressource': relation(LinkExperienceRessource, lazy=True)
+        
         model.add('experience', table=experienceTable, mapper_class=Experience)
 
         LinkExperienceInstitutionPorteurTable = getLinkExperienceInstitutionPorteur(metadata)
@@ -389,11 +390,14 @@ class InterClpsModel(object):
                    table=LinkExperienceCommuneTable,
                    mapper_class=LinkExperienceCommune)
 
-        metadata.create_all()
-        return model
-
 ## table rechercheLog ##
         rechercheLogTable = getAllRechercheLog(metadata)
         rechercheLogTable.create(checkfirst=True)
         mapper(RechercheLog, rechercheLogTable)
         model.add('rechercheLog', table=rechercheLogTable, mapper_class=Recit)
+
+
+        metadata.create_all()
+        return model
+
+

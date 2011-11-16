@@ -11,168 +11,168 @@ from z3c.sqlalchemy.mapper import MappedClassBase
 
 
 class Province(MappedClassBase):
-    pass
+    c = None
 
 
 class Commune(MappedClassBase):
-    pass
+    c = None
 
 
 class MotCle(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkMotCleTheme(MappedClassBase):
-    pass
+    c = None
 
 
 class Theme(MappedClassBase):
-    pass
+    c = None
 
 
 class Public(MappedClassBase):
-    pass
+    c = None
 
 
 class MilieuDeVie(MappedClassBase):
-    pass
+    c = None
 
 
 class PlateForme(MappedClassBase):
-    pass
+    c = None
 
 
 class SousPlateForme(MappedClassBase):
-    pass
+    c = None
 
 
 class Institution(MappedClassBase):
-    pass
+    c = None
 
 
 class InstitutionType(MappedClassBase):
-    pass
+    c = None
 
 
 class InstitutionAssuetudeIntervention(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkInstitutionAssuetudeIntervention(MappedClassBase):
-    pass
+    c = None
 
 
 class InstitutionAssuetudeActiviteProposee(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkInstitutionAssuetudeActiviteProposeePublic(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkInstitutionAssuetudeActiviteProposeePro(MappedClassBase):
-    pass
+    c = None
 
 
 class InstitutionAssuetudeThematique(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkInstitutionAssuetudeThematique(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkInstitutionCommuneCouverte(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkInstitutionSousPlateForme(MappedClassBase):
-    pass
+    c = None
 
 
 class Support(MappedClassBase):
-    pass
+    c = None
 
 
 class Ressource(MappedClassBase):
-    pass
+    c = None
 
 
 class Experience(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkRessourceMotCle(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkRessourceSupport(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkRessourceTheme(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkRessourcePublic(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceCommune(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceInstitutionPorteur(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceInstitutionPartenaire(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceInstitutionRessource(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceRessource(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceMilieuDeVie(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceSousPlateForme(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceMotCle(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceTheme(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperiencePublic(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkExperienceCommune(MappedClassBase):
-    pass
+    c = None
 
 
 class Recit(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkOutilRecit(MappedClassBase):
-    pass
+    c = None
 
 
 class Auteur(MappedClassBase):
-    pass
+    c = None
 
 
 class RechercheLog(MappedClassBase):
-    pass
+    c = None

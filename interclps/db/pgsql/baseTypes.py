@@ -18,6 +18,10 @@ class Commune(MappedClassBase):
     c = None
 
 
+class Clps(MappedClassBase):
+    c = None
+
+
 class MotCle(MappedClassBase):
     c = None
 
@@ -115,6 +119,10 @@ class LinkRessourceTheme(MappedClassBase):
 
 
 class LinkRessourcePublic(MappedClassBase):
+    c = None
+
+
+class LinkRessourceClps(MappedClassBase):
     c = None
 
 

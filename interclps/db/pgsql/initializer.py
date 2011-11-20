@@ -5,6 +5,7 @@ from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, backref
 from interclps.db.pgsql.baseTypes import (Province,
                                        Commune,
+                                       Clps,
                                        PlateForme,
                                        SousPlateForme,
                                        MotCle,
@@ -16,6 +17,7 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        LinkRessourceSupport,
                                        LinkRessourceTheme,
                                        LinkRessourcePublic,
+                                       LinkRessourceClps,
                                        Institution,
                                        InstitutionType,
                                        LinkInstitutionCommuneCouverte,
@@ -43,6 +45,7 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        RechercheLog)
 from interclps.db.pgsql.tables import (getAllProvince,
                                     getAllCommune,
+                                    getAllClps,
                                     getAllPlateForme,
                                     getAllSousPlateForme,
                                     getAllMotCle,
@@ -65,6 +68,7 @@ from interclps.db.pgsql.tables import (getAllProvince,
                                     getLinkRessourceSupport,
                                     getLinkRessourceTheme,
                                     getLinkRessourcePublic,
+                                    getLinkRessourceClps,
                                     getAllRecit,
                                     getAllExperience,
                                     getLinkExperienceInstitutionPorteur,
@@ -115,6 +119,13 @@ class InterClpsModel(object):
         model.add('commune', table=communeTable, mapper_class=Commune)
 
 
+## table clps ##
+        clpsTable = getAllClps(metadata)
+        clpsTable.create(checkfirst=True)
+        mapper(Clps, clpsTable)
+        model.add('clps', table=clpsTable, mapper_class=Clps)
+
+
 ## table plateforme ##
         plateformeTable = getAllPlateForme(metadata)
         plateformeTable.create(checkfirst=True)
@@ -156,6 +167,7 @@ class InterClpsModel(object):
         motCleTable.create(checkfirst=True)
         mapper(MotCle, motCleTable)
         model.add('motcle', table=motCleTable, mapper_class=MotCle)
+
 
 ## table auteur  ##
         auteurTable = getAllAuteur(metadata)
@@ -298,6 +310,13 @@ class InterClpsModel(object):
                   table=LinkRessourcePublicTable,
                   mapper_class=LinkRessourcePublic)
 
+
+        LinkRessourceClpsTable = getLinkRessourceClps(metadata)
+        LinkRessourceClpsTable.create(checkfirst=True)
+        mapper(LinkRessourceClps, LinkRessourceClpsTable)
+        model.add('link_ressource_clps',
+                  table=LinkRessourceClpsTable,
+                  mapper_class=LinkRessourceClps)
 
 ## table recit ##
         recitTable = getAllRecit(metadata)

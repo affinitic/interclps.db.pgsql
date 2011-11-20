@@ -38,6 +38,19 @@ def getAllCommune(metadata):
     return commune
 
 
+def getAllClps(metadata):
+    autoload = False
+    if metadata.bind.has_table('clps'):
+        autoload = True
+    clps = Table('clps', metadata,
+                 Column('clps_pk', Integer(),
+                        Sequence('clps_clps_pk_seq', optional=True),
+                        primary_key = True),
+                 Column('clps_nom', Text()),
+                 autoload=autoload)
+    return clps
+
+
 def getAllPlateForme(metadata):
     autoload = False
     if metadata.bind.has_table('plateforme'):
@@ -197,7 +210,6 @@ def getAllInstitution(metadata):
                         Column('institution_listing_ressource_plate_forme_assuetude', Boolean()),
                         Column('institution_listing_ressource_plate_forme_sante_famille', Boolean()),
                         Column('institution_listing_ressource_plate_forme_sante_environnement', Boolean()),
-                        
                         Column('institution_auteur_login', Text()),
                         Column('institution_institution_type_fk', Integer(),
                            ForeignKey('institution_type.institution_type_pk'),
@@ -507,6 +519,22 @@ def getLinkRessourceSupport(metadata):
                                   useexisting=True,
                                   autoload=autoload)
     return linkRessourceSupport
+
+
+def getLinkRessourceClps(metadata):
+    autoload = False
+    if metadata.bind.has_table('link_ressource_clps'):
+        autoload = True
+    linkRessourceClps = Table('link_ressource_clps', metadata,
+                                  Column('ressource_fk', Integer(),
+                                         ForeignKey('ressource.ressource_pk'),
+                                         primary_key = True),
+                                  Column('clps_fk', Integer(),
+                                         ForeignKey('clps.clps_pk'),
+                                         primary_key = True),
+                                  useexisting=True,
+                                  autoload=autoload)
+    return linkRessourceClps
 
 
 def getAllExperience(metadata):

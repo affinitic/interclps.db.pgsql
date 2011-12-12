@@ -784,6 +784,9 @@ def getAllAuteur(metadata):
                    Column('auteur_actif', Boolean(), default = True),
                    Column('auteur_for_experience', Boolean(), default = False),
                    Column('auteur_for_institution', Boolean(), default = False),
+                   Column('auteur_clps_fk', Integer(),
+                           ForeignKey('clps.clps_pk'),
+                           nullable=False),
                    Column('auteur_modification_date', DateTime(), default = func.now()),
                    Column('auteur_modification_employe', Text()),
                    autoload=autoload)

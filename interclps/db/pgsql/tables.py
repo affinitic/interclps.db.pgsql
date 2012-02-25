@@ -189,6 +189,7 @@ def getAllInstitution(metadata):
                         Column('institution_modification_date', DateTime(), default = func.now()),
                         Column('institution_modification_employe', Text()),
                         Column('institution_territoire_tout_brabant_wallon', Boolean()),
+                        Column('institution_territoire_tout_luxembourg', Boolean()),
                         Column('institution_zone_internationale', Boolean()),
                         Column('institution_zone_internationale_info', Text()),
                         Column('institution_zone_belgique', Boolean()),
@@ -397,6 +398,22 @@ def getLinkInstitutionSousPlateForme(metadata):
     return linkInstitutionSousPlateForme
 
 
+def getLinkInstitutionClps(metadata):
+    autoload = False
+    if metadata.bind.has_table('link_institution_clps'):
+        autoload = True
+    linkInstitutionClps = Table('link_institution_clps', metadata,
+                                  Column('institution_fk', Integer(),
+                                         ForeignKey('institution.institution_pk'),
+                                         primary_key = True),
+                                  Column('clps_fk', Integer(),
+                                         ForeignKey('clps.clps_pk'),
+                                         primary_key = True),
+                                  useexisting=True,
+                                  autoload=autoload)
+    return linkInstitutionClps
+
+
 def getAllSupport(metadata):
     autoload = False
     if metadata.bind.has_table('support'):
@@ -557,6 +574,7 @@ def getAllExperience(metadata):
                   Column('experience_demarche_actions', Text()),
                   Column('experience_commune_international', Text()),
                   Column('experience_territoire_tout_brabant_wallon', Boolean()),
+                  Column('experience_territoire_tout_luxembourg', Boolean()),
                   Column('experience_periode_deroulement', Text()),
                   Column('experience_moyens', Text()),
                   Column('experience_evaluation_enseignement', Text()),
@@ -749,6 +767,22 @@ def getLinkExperiencePublic(metadata):
                                   useexisting=True,
                                   autoload=autoload)
     return linkExperiencePublic
+
+
+def getLinkExperienceClps(metadata):
+    autoload = False
+    if metadata.bind.has_table('link_experience_clps'):
+        autoload = True
+    linkExperienceClps = Table('link_experience_clps', metadata,
+                                  Column('experience_fk', Integer(),
+                                         ForeignKey('experience.experience_pk'),
+                                         primary_key = True),
+                                  Column('clps_fk', Integer(),
+                                         ForeignKey('clps.clps_pk'),
+                                         primary_key = True),
+                                  useexisting=True,
+                                  autoload=autoload)
+    return linkExperienceClps
 
 
 def getAllRecit(metadata):

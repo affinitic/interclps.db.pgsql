@@ -29,6 +29,7 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        LinkInstitutionAssuetudeActiviteProposeePublic,
                                        LinkInstitutionAssuetudeActiviteProposeePro,
                                        LinkInstitutionAssuetudeThematique,
+                                       LinkInstitutionClps,
                                        Experience,
                                        LinkExperienceInstitutionPorteur,
                                        LinkExperienceInstitutionPartenaire,
@@ -40,6 +41,7 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        LinkExperienceTheme,
                                        LinkExperiencePublic,
                                        LinkExperienceCommune,
+                                       LinkExperienceClps,
                                        Recit,
                                        Auteur,
                                        RechercheLog)
@@ -63,6 +65,7 @@ from interclps.db.pgsql.tables import (getAllProvince,
                                     getLinkInstitutionAssuetudeActiviteProposeePublic,
                                     getLinkInstitutionAssuetudeActiviteProposeePro,
                                     getLinkInstitutionAssuetudeThematique,
+                                    getLinkInstitutionClps,
                                     getAllSupport,
                                     getAllRessource,
                                     getLinkRessourceSupport,
@@ -81,6 +84,7 @@ from interclps.db.pgsql.tables import (getAllProvince,
                                     getLinkExperienceTheme,
                                     getLinkExperiencePublic,
                                     getLinkExperienceCommune,
+                                    getLinkExperienceClps,
                                     getAllAuteur,
                                     getAllRechercheLog)
 
@@ -218,6 +222,14 @@ class InterClpsModel(object):
                   table=linkInstitutionCommuneCouverteTable,
                   mapper_class=LinkInstitutionCommuneCouverte)
 
+        LinkInstitutionClpsTable = getLinkInstitutionClps(metadata)
+        LinkInstitutionClpsTable.create(checkfirst=True)
+        mapper(LinkInstitutionClps, LinkInstitutionClpsTable)
+        model.add('link_institution_clps',
+                  table=LinkInstitutionClpsTable,
+                  mapper_class=LinkInstitutionClps)
+
+
 ## table info assuetude pour institution ##
         assuetudeInterventionForInstitutionTable = getAllAssuetudeInterventionForInstitution(metadata)
         assuetudeInterventionForInstitutionTable.create(checkfirst=True)
@@ -333,7 +345,7 @@ class InterClpsModel(object):
                            'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True)})
                            #'institution_ressource': relation(LinkExperienceInstitutionRessource, lazy=True),
                            #'ressource': relation(LinkExperienceRessource, lazy=True)
-        
+
         model.add('experience', table=experienceTable, mapper_class=Experience)
 
         LinkExperienceInstitutionPorteurTable = getLinkExperienceInstitutionPorteur(metadata)
@@ -409,6 +421,14 @@ class InterClpsModel(object):
                    table=LinkExperienceCommuneTable,
                    mapper_class=LinkExperienceCommune)
 
+        LinkExperienceClpsTable = getLinkExperienceClps(metadata)
+        LinkExperienceClpsTable.create(checkfirst=True)
+        mapper(LinkExperienceClps, LinkExperienceClpsTable)
+        model.add('link_experience_clps',
+                  table=LinkExperienceClpsTable,
+                  mapper_class=LinkExperienceClps)
+
+
 ## table rechercheLog ##
         rechercheLogTable = getAllRechercheLog(metadata)
         rechercheLogTable.create(checkfirst=True)
@@ -418,5 +438,3 @@ class InterClpsModel(object):
 
         metadata.create_all()
         return model
-
-

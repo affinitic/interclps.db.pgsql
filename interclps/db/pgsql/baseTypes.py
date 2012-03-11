@@ -126,7 +126,11 @@ class LinkRessourcePublic(MappedClassBase):
     c = None
 
 
-class LinkRessourceClps(MappedClassBase):
+class LinkRessourceClpsProprio(MappedClassBase):
+    c = None
+
+
+class LinkRessourceClpsDispo(MappedClassBase):
     c = None
 
 

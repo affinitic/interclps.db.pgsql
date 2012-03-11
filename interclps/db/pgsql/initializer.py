@@ -17,7 +17,8 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        LinkRessourceSupport,
                                        LinkRessourceTheme,
                                        LinkRessourcePublic,
-                                       LinkRessourceClps,
+                                       LinkRessourceClpsProprio,
+                                       LinkRessourceClpsDispo,
                                        Institution,
                                        InstitutionType,
                                        LinkInstitutionCommuneCouverte,
@@ -46,47 +47,48 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        Auteur,
                                        RechercheLog)
 from interclps.db.pgsql.tables import (getAllProvince,
-                                    getAllCommune,
-                                    getAllClps,
-                                    getAllPlateForme,
-                                    getAllSousPlateForme,
-                                    getAllMotCle,
-                                    getAllTheme,
-                                    getAllPublic,
-                                    getAllMilieuDeVie,
-                                    getAllInstitution,
-                                    getAllInstitutionType,
-                                    getLinkInstitutionCommuneCouverte,
-                                    getLinkInstitutionSousPlateForme,
-                                    getAllAssuetudeInterventionForInstitution,
-                                    getAllAssuetudeActiviteProposeeForInstitution,
-                                    getAllAssuetudeThematiqueForInstitution,
-                                    getLinkInstitutionAssuetudeIntervention,
-                                    getLinkInstitutionAssuetudeActiviteProposeePublic,
-                                    getLinkInstitutionAssuetudeActiviteProposeePro,
-                                    getLinkInstitutionAssuetudeThematique,
-                                    getLinkInstitutionClps,
-                                    getAllSupport,
-                                    getAllRessource,
-                                    getLinkRessourceSupport,
-                                    getLinkRessourceTheme,
-                                    getLinkRessourcePublic,
-                                    getLinkRessourceClps,
-                                    getAllRecit,
-                                    getAllExperience,
-                                    getLinkExperienceInstitutionPorteur,
-                                    getLinkExperienceInstitutionPartenaire,
-                                    getLinkExperienceInstitutionRessource,
-                                    getLinkExperienceRessource,
-                                    getLinkExperienceMilieuDeVie,
-                                    getLinkExperienceSousPlateForme,
-                                    getLinkExperienceMotCle,
-                                    getLinkExperienceTheme,
-                                    getLinkExperiencePublic,
-                                    getLinkExperienceCommune,
-                                    getLinkExperienceClps,
-                                    getAllAuteur,
-                                    getAllRechercheLog)
+                                       getAllCommune,
+                                       getAllClps,
+                                       getAllPlateForme,
+                                       getAllSousPlateForme,
+                                       getAllMotCle,
+                                       getAllTheme,
+                                       getAllPublic,
+                                       getAllMilieuDeVie,
+                                       getAllInstitution,
+                                       getAllInstitutionType,
+                                       getLinkInstitutionCommuneCouverte,
+                                       getLinkInstitutionSousPlateForme,
+                                       getAllAssuetudeInterventionForInstitution,
+                                       getAllAssuetudeActiviteProposeeForInstitution,
+                                       getAllAssuetudeThematiqueForInstitution,
+                                       getLinkInstitutionAssuetudeIntervention,
+                                       getLinkInstitutionAssuetudeActiviteProposeePublic,
+                                       getLinkInstitutionAssuetudeActiviteProposeePro,
+                                       getLinkInstitutionAssuetudeThematique,
+                                       getLinkInstitutionClps,
+                                       getAllSupport,
+                                       getAllRessource,
+                                       getLinkRessourceSupport,
+                                       getLinkRessourceTheme,
+                                       getLinkRessourcePublic,
+                                       getLinkRessourceClpsProprio,
+                                       getLinkRessourceClpsDispo,
+                                       getAllRecit,
+                                       getAllExperience,
+                                       getLinkExperienceInstitutionPorteur,
+                                       getLinkExperienceInstitutionPartenaire,
+                                       getLinkExperienceInstitutionRessource,
+                                       getLinkExperienceRessource,
+                                       getLinkExperienceMilieuDeVie,
+                                       getLinkExperienceSousPlateForme,
+                                       getLinkExperienceMotCle,
+                                       getLinkExperienceTheme,
+                                       getLinkExperiencePublic,
+                                       getLinkExperienceCommune,
+                                       getLinkExperienceClps,
+                                       getAllAuteur,
+                                       getAllRechercheLog)
 
 
 class InterClpsModel(object):
@@ -323,12 +325,19 @@ class InterClpsModel(object):
                   mapper_class=LinkRessourcePublic)
 
 
-        LinkRessourceClpsTable = getLinkRessourceClps(metadata)
-        LinkRessourceClpsTable.create(checkfirst=True)
-        mapper(LinkRessourceClps, LinkRessourceClpsTable)
-        model.add('link_ressource_clps',
-                  table=LinkRessourceClpsTable,
-                  mapper_class=LinkRessourceClps)
+        LinkRessourceClpsProprioTable = getLinkRessourceClpsProprio(metadata)
+        LinkRessourceClpsProprioTable.create(checkfirst=True)
+        mapper(LinkRessourceClpsProprio, LinkRessourceClpsProprioTable)
+        model.add('link_ressource_clps_proprio',
+                  table=LinkRessourceClpsProprioTable,
+                  mapper_class=LinkRessourceClpsProprio)
+
+        LinkRessourceClpsDispoTable = getLinkRessourceClpsDispo(metadata)
+        LinkRessourceClpsDispoTable.create(checkfirst=True)
+        mapper(LinkRessourceClpsDispo, LinkRessourceClpsDispoTable)
+        model.add('link_ressource_clps_dispo',
+                  table=LinkRessourceClpsDispoTable,
+                  mapper_class=LinkRessourceClpsDispo)
 
 ## table recit ##
         recitTable = getAllRecit(metadata)

@@ -538,11 +538,33 @@ def getLinkRessourceSupport(metadata):
     return linkRessourceSupport
 
 
-def getLinkRessourceClps(metadata):
+def getLinkRessourceClpsDispo(metadata):
+    """
+    indiquer dans quel clps une ressource est dispo
+    """
     autoload = False
-    if metadata.bind.has_table('link_ressource_clps'):
+    if metadata.bind.has_table('link_ressource_clps_dispo'):
         autoload = True
-    linkRessourceClps = Table('link_ressource_clps', metadata,
+    linkRessourceClpsDispo = Table('link_ressource_clps_dispo', metadata,
+                                            Column('ressource_fk', Integer(),
+                                                   ForeignKey('ressource.ressource_pk'),
+                                                   primary_key = True),
+                                            Column('clps_fk', Integer(),
+                                                   ForeignKey('clps.clps_pk'),
+                                                  primary_key = True),
+                                            useexisting=True,
+                                            autoload=autoload)
+    return linkRessourceClpsDispo
+
+
+def getLinkRessourceClpsProprio(metadata):
+    """
+    indiquer quel est le clps proprio comme auteur de la ressource
+    """
+    autoload = False
+    if metadata.bind.has_table('link_ressource_clps_proprio'):
+        autoload = True
+    linkRessourceClpsProprio = Table('link_ressource_clps_proprio', metadata,
                                   Column('ressource_fk', Integer(),
                                          ForeignKey('ressource.ressource_pk'),
                                          primary_key = True),
@@ -551,7 +573,9 @@ def getLinkRessourceClps(metadata):
                                          primary_key = True),
                                   useexisting=True,
                                   autoload=autoload)
-    return linkRessourceClps
+    return linkRessourceClpsProprio
+
+
 
 
 def getAllExperience(metadata):

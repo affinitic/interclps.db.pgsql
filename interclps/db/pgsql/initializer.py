@@ -128,7 +128,9 @@ class InterClpsModel(object):
 ## table clps ##
         clpsTable = getAllClps(metadata)
         clpsTable.create(checkfirst=True)
-        mapper(Clps, clpsTable)
+        mapper(Clps, clpsTable,
+               properties={'commune': relation(Commune,
+                                               uselist=False)})
         model.add('clps', table=clpsTable, mapper_class=Clps)
 
 

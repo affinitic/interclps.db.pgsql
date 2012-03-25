@@ -46,8 +46,17 @@ def getAllClps(metadata):
                  Column('clps_pk', Integer(),
                         Sequence('clps_clps_pk_seq', optional=True),
                         primary_key = True),
+                 Column('clps_sigle', Text()),
                  Column('clps_nom', Text()),
-                 autoload=autoload)
+                 Column('clps_adresse', Text()),
+                 Column('clps_nom_contact', Text()),
+                 Column('clps_email_contact', Text()),
+                 Column('clps_commune_fk', Integer(),
+                        ForeignKey('commune.com_pk'),
+                        nullable=False),
+                 
+                 autoload=autoload,
+                 useexisting=True)
     return clps
 
 
@@ -574,8 +583,6 @@ def getLinkRessourceClpsProprio(metadata):
                                   useexisting=True,
                                   autoload=autoload)
     return linkRessourceClpsProprio
-
-
 
 
 def getAllExperience(metadata):

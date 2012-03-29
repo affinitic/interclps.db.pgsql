@@ -50,6 +50,7 @@ def getAllClps(metadata):
                  Column('clps_nom', Text()),
                  Column('clps_adresse', Text()),
                  Column('clps_nom_contact', Text()),
+                 Column('clps_prenom_contact', Text()),
                  Column('clps_email_contact', Text()),
                  Column('clps_commune_fk', Integer(),
                         ForeignKey('commune.com_pk'),

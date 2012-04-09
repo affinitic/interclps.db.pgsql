@@ -30,7 +30,7 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        LinkInstitutionAssuetudeActiviteProposeePublic,
                                        LinkInstitutionAssuetudeActiviteProposeePro,
                                        LinkInstitutionAssuetudeThematique,
-                                       LinkInstitutionClps,
+                                       LinkInstitutionClpsProprio,
                                        Experience,
                                        LinkExperienceInstitutionPorteur,
                                        LinkExperienceInstitutionPartenaire,
@@ -42,7 +42,7 @@ from interclps.db.pgsql.baseTypes import (Province,
                                        LinkExperienceTheme,
                                        LinkExperiencePublic,
                                        LinkExperienceCommune,
-                                       LinkExperienceClps,
+                                       LinkExperienceClpsProprio,
                                        Recit,
                                        Auteur,
                                        RechercheLog)
@@ -66,7 +66,7 @@ from interclps.db.pgsql.tables import (getAllProvince,
                                        getLinkInstitutionAssuetudeActiviteProposeePublic,
                                        getLinkInstitutionAssuetudeActiviteProposeePro,
                                        getLinkInstitutionAssuetudeThematique,
-                                       getLinkInstitutionClps,
+                                       getLinkInstitutionClpsProprio,
                                        getAllSupport,
                                        getAllRessource,
                                        getLinkRessourceSupport,
@@ -86,7 +86,7 @@ from interclps.db.pgsql.tables import (getAllProvince,
                                        getLinkExperienceTheme,
                                        getLinkExperiencePublic,
                                        getLinkExperienceCommune,
-                                       getLinkExperienceClps,
+                                       getLinkExperienceClpsProprio,
                                        getAllAuteur,
                                        getAllRechercheLog)
 
@@ -226,12 +226,12 @@ class InterClpsModel(object):
                   table=linkInstitutionCommuneCouverteTable,
                   mapper_class=LinkInstitutionCommuneCouverte)
 
-        LinkInstitutionClpsTable = getLinkInstitutionClps(metadata)
-        LinkInstitutionClpsTable.create(checkfirst=True)
-        mapper(LinkInstitutionClps, LinkInstitutionClpsTable)
-        model.add('link_institution_clps',
-                  table=LinkInstitutionClpsTable,
-                  mapper_class=LinkInstitutionClps)
+        LinkInstitutionClpsProprioTable = getLinkInstitutionClpsProprio(metadata)
+        LinkInstitutionClpsProprioTable.create(checkfirst=True)
+        mapper(LinkInstitutionClpsProprio, LinkInstitutionClpsProprioTable)
+        model.add('link_institution_clps_proprio',
+                  table=LinkInstitutionClpsProprioTable,
+                  mapper_class=LinkInstitutionClpsProprio)
 
 
 ## table info assuetude pour institution ##
@@ -432,12 +432,12 @@ class InterClpsModel(object):
                    table=LinkExperienceCommuneTable,
                    mapper_class=LinkExperienceCommune)
 
-        LinkExperienceClpsTable = getLinkExperienceClps(metadata)
-        LinkExperienceClpsTable.create(checkfirst=True)
-        mapper(LinkExperienceClps, LinkExperienceClpsTable)
-        model.add('link_experience_clps',
-                  table=LinkExperienceClpsTable,
-                  mapper_class=LinkExperienceClps)
+        LinkExperienceClpsProprioTable = getLinkExperienceClpsProprio(metadata)
+        LinkExperienceClpsProprioTable.create(checkfirst=True)
+        mapper(LinkExperienceClpsProprio, LinkExperienceClpsProprioTable)
+        model.add('link_experience_clps_proprio',
+                  table=LinkExperienceClpsProprioTable,
+                  mapper_class=LinkExperienceClpsProprio)
 
 
 ## table rechercheLog ##

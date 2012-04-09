@@ -94,7 +94,7 @@ class LinkInstitutionSousPlateForme(MappedClassBase):
     c = None
 
 
-class LinkInstitutionClps(MappedClassBase):
+class LinkInstitutionClpsProprio(MappedClassBase):
     c = None
 
 
@@ -178,7 +178,7 @@ class LinkExperienceCommune(MappedClassBase):
     c = None
 
 
-class LinkExperienceClps(MappedClassBase):
+class LinkExperienceClpsProprio(MappedClassBase):
     c = None
 
 

@@ -397,31 +397,31 @@ def getLinkInstitutionSousPlateForme(metadata):
     if metadata.bind.has_table('link_institution_sousplateforme'):
         autoload = True
     linkInstitutionSousPlateForme = Table('link_institution_sousplateforme', metadata,
-                                     Column('institution_fk', Integer(),
-                                            ForeignKey('institution.institution_pk'),
-                                            primary_key = True),
-                                     Column('sousplateforme_fk', Integer(),
-                                            ForeignKey('sousplateforme.sousplateforme_pk'),
-                                            primary_key = True),
-                                     useexisting=True,
-                                     autoload=autoload)
+                                           Column('institution_fk', Integer(),
+                                                  ForeignKey('institution.institution_pk'),
+                                                  primary_key = True),
+                                           Column('sousplateforme_fk', Integer(),
+                                                  ForeignKey('sousplateforme.sousplateforme_pk'),
+                                                  primary_key = True),
+                                           useexisting=True,
+                                           autoload=autoload)
     return linkInstitutionSousPlateForme
 
 
-def getLinkInstitutionClps(metadata):
+def getLinkInstitutionClpsProprio(metadata):
     autoload = False
-    if metadata.bind.has_table('link_institution_clps'):
+    if metadata.bind.has_table('link_institution_clps_proprio'):
         autoload = True
-    linkInstitutionClps = Table('link_institution_clps', metadata,
-                                  Column('institution_fk', Integer(),
-                                         ForeignKey('institution.institution_pk'),
-                                         primary_key = True),
-                                  Column('clps_fk', Integer(),
-                                         ForeignKey('clps.clps_pk'),
-                                         primary_key = True),
-                                  useexisting=True,
-                                  autoload=autoload)
-    return linkInstitutionClps
+    linkInstitutionClpsProprio = Table('link_institution_clps_proprio', metadata,
+                                       Column('institution_fk', Integer(),
+                                              ForeignKey('institution.institution_pk'),
+                                              primary_key = True),
+                                       Column('clps_fk', Integer(),
+                                              ForeignKey('clps.clps_pk'),
+                                              primary_key = True),
+                                       useexisting=True,
+                                       autoload=autoload)
+    return linkInstitutionClpsProprio
 
 
 def getAllSupport(metadata):
@@ -801,20 +801,20 @@ def getLinkExperiencePublic(metadata):
     return linkExperiencePublic
 
 
-def getLinkExperienceClps(metadata):
+def getLinkExperienceClpsProprio(metadata):
     autoload = False
-    if metadata.bind.has_table('link_experience_clps'):
+    if metadata.bind.has_table('link_experience_clps_proprio'):
         autoload = True
-    linkExperienceClps = Table('link_experience_clps', metadata,
-                                  Column('experience_fk', Integer(),
-                                         ForeignKey('experience.experience_pk'),
-                                         primary_key = True),
-                                  Column('clps_fk', Integer(),
-                                         ForeignKey('clps.clps_pk'),
-                                         primary_key = True),
-                                  useexisting=True,
-                                  autoload=autoload)
-    return linkExperienceClps
+    linkExperienceClpsProprio = Table('link_experience_clps_proprio', metadata,
+                                      Column('experience_fk', Integer(),
+                                             ForeignKey('experience.experience_pk'),
+                                             primary_key = True),
+                                      Column('clps_fk', Integer(),
+                                             ForeignKey('clps.clps_pk'),
+                                             primary_key = True),
+                                      useexisting=True,
+                                      autoload=autoload)
+    return linkExperienceClpsProprio
 
 
 def getAllRecit(metadata):

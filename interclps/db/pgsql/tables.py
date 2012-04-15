@@ -458,7 +458,6 @@ def getAllRessource(metadata):
                     Column('ressource_edition', Text()),
                     Column('ressource_date_edition', Text()),
                     Column('ressource_lieu_edition', Text()),
-                    Column('ressource_public', Text()),
                     Column('ressource_autre_info', Text()),
                     Column('ressource_lien_pipsa', Text()),
                     Column('ressource_autre_lien', Text()),

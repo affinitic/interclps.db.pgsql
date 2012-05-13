@@ -329,7 +329,9 @@ class InterClpsModel(object):
 
         LinkRessourceClpsProprioTable = getLinkRessourceClpsProprio(metadata)
         LinkRessourceClpsProprioTable.create(checkfirst=True)
-        mapper(LinkRessourceClpsProprio, LinkRessourceClpsProprioTable)
+        mapper(LinkRessourceClpsProprio, LinkRessourceClpsProprioTable,
+               properties={'ressourceOfClpsProprio': relation(Ressource, lazy=True),
+                           'proprio': relation(Clps, lazy=True)})
         model.add('link_ressource_clps_proprio',
                   table=LinkRessourceClpsProprioTable,
                   mapper_class=LinkRessourceClpsProprio)

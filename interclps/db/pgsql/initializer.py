@@ -385,6 +385,14 @@ class InterClpsModel(object):
                   table=LinkExperienceInstitutionRessourceTable,
                   mapper_class=LinkExperienceInstitutionRessource)
 
+        LinkExperienceClpsProprioTable = getLinkExperienceClpsProprio(metadata)
+        LinkExperienceClpsProprioTable.create(checkfirst=True)
+        mapper(LinkExperienceClpsProprio, LinkExperienceClpsProprioTable,
+               properties={'clps_proprio':relation(Clps, lazy=True)})
+        model.add('link_experience_clps_proprio',
+                  table=LinkExperienceClpsProprioTable,
+                  mapper_class=LinkExperienceClpsProprio)
+
         LinkExperienceRessourceTable = getLinkExperienceRessource(metadata)
         LinkExperienceRessourceTable.create(checkfirst=True)
         mapper(LinkExperienceRessource, LinkExperienceRessourceTable)
@@ -434,12 +442,7 @@ class InterClpsModel(object):
                    table=LinkExperienceCommuneTable,
                    mapper_class=LinkExperienceCommune)
 
-        LinkExperienceClpsProprioTable = getLinkExperienceClpsProprio(metadata)
-        LinkExperienceClpsProprioTable.create(checkfirst=True)
-        mapper(LinkExperienceClpsProprio, LinkExperienceClpsProprioTable)
-        model.add('link_experience_clps_proprio',
-                  table=LinkExperienceClpsProprioTable,
-                  mapper_class=LinkExperienceClpsProprio)
+
 
 
 ## table rechercheLog ##

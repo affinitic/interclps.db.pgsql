@@ -4,48 +4,49 @@ from zope.interface import implements
 
 from sqlalchemy.orm import mapper, relation, backref
 from interclps.db.pgsql.baseTypes import (Province,
-                                       Commune,
-                                       Clps,
-                                       PlateForme,
-                                       SousPlateForme,
-                                       MotCle,
-                                       Theme,
-                                       Public,
-                                       MilieuDeVie,
-                                       Support,
-                                       Ressource,
-                                       LinkRessourceSupport,
-                                       LinkRessourceTheme,
-                                       LinkRessourcePublic,
-                                       LinkRessourceClpsProprio,
-                                       LinkRessourceClpsDispo,
-                                       Institution,
-                                       InstitutionType,
-                                       LinkInstitutionCommuneCouverte,
-                                       LinkInstitutionSousPlateForme,
-                                       InstitutionAssuetudeIntervention,
-                                       InstitutionAssuetudeActiviteProposee,
-                                       InstitutionAssuetudeThematique,
-                                       LinkInstitutionAssuetudeIntervention,
-                                       LinkInstitutionAssuetudeActiviteProposeePublic,
-                                       LinkInstitutionAssuetudeActiviteProposeePro,
-                                       LinkInstitutionAssuetudeThematique,
-                                       LinkInstitutionClpsProprio,
-                                       Experience,
-                                       LinkExperienceInstitutionPorteur,
-                                       LinkExperienceInstitutionPartenaire,
-                                       LinkExperienceInstitutionRessource,
-                                       LinkExperienceRessource,
-                                       LinkExperienceMilieuDeVie,
-                                       LinkExperienceSousPlateForme,
-                                       LinkExperienceMotCle,
-                                       LinkExperienceTheme,
-                                       LinkExperiencePublic,
-                                       LinkExperienceCommune,
-                                       LinkExperienceClpsProprio,
-                                       Recit,
-                                       Auteur,
-                                       RechercheLog)
+                                          Commune,
+                                          Clps,
+                                          PlateForme,
+                                          SousPlateForme,
+                                          MotCle,
+                                          Theme,
+                                          Public,
+                                          MilieuDeVie,
+                                          Support,
+                                          Ressource,
+                                          LinkRessourceSupport,
+                                          LinkRessourceTheme,
+                                          LinkRessourcePublic,
+                                          LinkRessourceClpsProprio,
+                                          LinkRessourceClpsDispo,
+                                          Institution,
+                                          InstitutionType,
+                                          LinkInstitutionCommuneCouverte,
+                                          LinkInstitutionSousPlateForme,
+                                          InstitutionAssuetudeIntervention,
+                                          InstitutionAssuetudeActiviteProposee,
+                                          InstitutionAssuetudeThematique,
+                                          LinkInstitutionAssuetudeIntervention,
+                                          LinkInstitutionAssuetudeActiviteProposeePublic,
+                                          LinkInstitutionAssuetudeActiviteProposeePro,
+                                          LinkInstitutionAssuetudeThematique,
+                                          LinkInstitutionClpsProprio,
+                                          Experience,
+                                          LinkExperienceInstitutionPorteur,
+                                          LinkExperienceInstitutionPartenaire,
+                                          LinkExperienceInstitutionRessource,
+                                          LinkExperienceRessource,
+                                          LinkExperienceMilieuDeVie,
+                                          LinkExperienceSousPlateForme,
+                                          LinkExperienceMotCle,
+                                          LinkExperienceTheme,
+                                          LinkExperiencePublic,
+                                          LinkExperienceCommune,
+                                          LinkExperienceClpsProprio,
+                                          Recit,
+                                          Auteur,
+                                          RechercheLog,
+                                          ExperienceMaj)
 from interclps.db.pgsql.tables import (getAllProvince,
                                        getAllCommune,
                                        getAllClps,
@@ -88,7 +89,8 @@ from interclps.db.pgsql.tables import (getAllProvince,
                                        getLinkExperienceCommune,
                                        getLinkExperienceClpsProprio,
                                        getAllAuteur,
-                                       getAllRechercheLog)
+                                       getAllRechercheLog,
+                                       getAllExperienceMaj)
 
 
 class InterClpsModel(object):
@@ -105,13 +107,11 @@ class InterClpsModel(object):
         model = Model()
         model.metadata = metadata
 
-
 ## table province ##
         provinceTable = getAllProvince(metadata)
         provinceTable.create(checkfirst=True)
         mapper(Province, provinceTable)
         model.add('province', table=provinceTable, mapper_class=Province)
-
 
 ## table commune ##
         communeTable = getAllCommune(metadata)
@@ -124,15 +124,15 @@ class InterClpsModel(object):
                                                                 uselist=False))})
         model.add('commune', table=communeTable, mapper_class=Commune)
 
-
 ## table clps ##
         clpsTable = getAllClps(metadata)
         clpsTable.create(checkfirst=True)
         mapper(Clps, clpsTable,
                properties={'commune': relation(Commune,
                                                uselist=False)})
-        model.add('clps', table=clpsTable, mapper_class=Clps)
-
+        model.add('clps',
+                  table=clpsTable,
+                  mapper_class=Clps)
 
 ## table plateforme ##
         plateformeTable = getAllPlateForme(metadata)
@@ -163,7 +163,6 @@ class InterClpsModel(object):
         mapper(MilieuDeVie, milieuDeVieTable)
         model.add('milieudevie', table=milieuDeVieTable, mapper_class=MilieuDeVie)
 
-
 ## table theme ##
         themeTable = getAllTheme(metadata)
         themeTable.create(checkfirst=True)
@@ -174,8 +173,9 @@ class InterClpsModel(object):
         motCleTable = getAllMotCle(metadata)
         motCleTable.create(checkfirst=True)
         mapper(MotCle, motCleTable)
-        model.add('motcle', table=motCleTable, mapper_class=MotCle)
-
+        model.add('motcle',
+                  table=motCleTable,
+                  mapper_class=MotCle)
 
 ## table auteur  ##
         auteurTable = getAllAuteur(metadata)
@@ -185,16 +185,18 @@ class InterClpsModel(object):
                                                             uselist=False,
                                                             backref=backref('auteurFromExperience',
                                                                             lazy=True,
-                                                                            uselist=False))})
-        model.add('auteur', table = auteurTable, mapper_class = Auteur)
-
+                                                                            uselist=False)),
+                           'clpsOrigine': relation(Clps,
+                                                   uselist=False)})
+        model.add('auteur',
+                  table=auteurTable,
+                  mapper_class=Auteur)
 
 ## table institution-type ##
         institutionTypeTable = getAllInstitutionType(metadata)
         institutionTypeTable.create(checkfirst=True)
         mapper(InstitutionType, institutionTypeTable)
         model.add('institution_type', table=institutionTypeTable, mapper_class=InstitutionType)
-
 
 ## table institution ##
         institutionTable = getAllInstitution(metadata)
@@ -206,7 +208,7 @@ class InterClpsModel(object):
                                                                lazy=True,
                                                                uselist=False)),
                            'auteur': relation(Auteur,
-                                            uselist=False),
+                                              uselist=False),
                            'type': relation(InstitutionType,
                                             uselist=False)})
         model.add('institution', table=institutionTable, mapper_class=Institution)
@@ -233,7 +235,6 @@ class InterClpsModel(object):
                   table=LinkInstitutionClpsProprioTable,
                   mapper_class=LinkInstitutionClpsProprio)
 
-
 ## table info assuetude pour institution ##
         assuetudeInterventionForInstitutionTable = getAllAssuetudeInterventionForInstitution(metadata)
         assuetudeInterventionForInstitutionTable.create(checkfirst=True)
@@ -244,8 +245,7 @@ class InterClpsModel(object):
         linkAssuetudeInterventionForInstitutionTable.create(checkfirst=True)
         mapper(LinkInstitutionAssuetudeIntervention, linkAssuetudeInterventionForInstitutionTable,
                primary_key=[linkAssuetudeInterventionForInstitutionTable.c.institution_fk, linkAssuetudeInterventionForInstitutionTable.c.assuetude_intervention_fk],
-               properties={'assuetudeIntervention': relation(InstitutionAssuetudeIntervention,
-                                        uselist=False)})
+               properties={'assuetudeIntervention': relation(InstitutionAssuetudeIntervention, uselist=False)})
         model.add('link_institution_asuetude_intervention',
                   table=linkAssuetudeInterventionForInstitutionTable,
                   mapper_class=LinkInstitutionAssuetudeIntervention)
@@ -284,13 +284,11 @@ class InterClpsModel(object):
                   table=linkAssuetudeThematiqueForInstitutionTable,
                   mapper_class=LinkInstitutionAssuetudeThematique)
 
-
 ## table support ##
         supportTable = getAllSupport(metadata)
         supportTable.create(checkfirst=True)
         mapper(Support, supportTable)
         model.add('support', table=supportTable, mapper_class=Support)
-
 
 ## table ressource liee a la table support et a la table theme ##
         ressourceTable = getAllRessource(metadata)
@@ -310,22 +308,19 @@ class InterClpsModel(object):
                   table=LinkRessourceSupportTable,
                   mapper_class=LinkRessourceSupport)
 
-
         LinkRessourceThemeTable = getLinkRessourceTheme(metadata)
         LinkRessourceThemeTable.create(checkfirst=True)
         mapper(LinkRessourceTheme, LinkRessourceThemeTable)
-        model.add('link_eressource_theme',
+        model.add('link_ressource_theme',
                   table=LinkRessourceThemeTable,
                   mapper_class=LinkRessourceTheme)
-
 
         LinkRessourcePublicTable = getLinkRessourcePublic(metadata)
         LinkRessourcePublicTable.create(checkfirst=True)
         mapper(LinkRessourcePublic, LinkRessourcePublicTable)
-        model.add('link_eressource_public',
+        model.add('link_ressource_public',
                   table=LinkRessourcePublicTable,
                   mapper_class=LinkRessourcePublic)
-
 
         LinkRessourceClpsProprioTable = getLinkRessourceClpsProprio(metadata)
         LinkRessourceClpsProprioTable.create(checkfirst=True)
@@ -349,13 +344,14 @@ class InterClpsModel(object):
         mapper(Recit, recitTable)
         model.add('recit', table=recitTable, mapper_class=Recit)
 
-
 ## table experience ##
         experienceTable = getAllExperience(metadata)
         experienceTable.create(checkfirst=True)
         mapper(Experience, experienceTable,
                properties={'institution_porteur': relation(LinkExperienceInstitutionPorteur, lazy=True),
-                           'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True)})
+                           'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True),
+                           'clpsOrigine': relation(Clps,
+                                                   uselist=False)})
                            #'institution_ressource': relation(LinkExperienceInstitutionRessource, lazy=True),
                            #'ressource': relation(LinkExperienceRessource, lazy=True)
 
@@ -388,7 +384,7 @@ class InterClpsModel(object):
         LinkExperienceClpsProprioTable = getLinkExperienceClpsProprio(metadata)
         LinkExperienceClpsProprioTable.create(checkfirst=True)
         mapper(LinkExperienceClpsProprio, LinkExperienceClpsProprioTable,
-               properties={'clps_proprio':relation(Clps, lazy=True)})
+               properties={'clps_proprio': relation(Clps, lazy=True)})
         model.add('link_experience_clps_proprio',
                   table=LinkExperienceClpsProprioTable,
                   mapper_class=LinkExperienceClpsProprio)
@@ -425,32 +421,37 @@ class InterClpsModel(object):
         LinkExperienceThemeTable.create(checkfirst=True)
         mapper(LinkExperienceTheme, LinkExperienceThemeTable)
         model.add('link_experience_theme',
-                   table=LinkExperienceThemeTable,
-                   mapper_class=LinkExperienceTheme)
+                  table=LinkExperienceThemeTable,
+                  mapper_class=LinkExperienceTheme)
 
         LinkExperiencePublicTable = getLinkExperiencePublic(metadata)
         LinkExperiencePublicTable.create(checkfirst=True)
         mapper(LinkExperiencePublic, LinkExperiencePublicTable)
         model.add('link_experience_public',
-                   table=LinkExperiencePublicTable,
-                   mapper_class=LinkExperiencePublic)
+                  table=LinkExperiencePublicTable,
+                  mapper_class=LinkExperiencePublic)
 
         LinkExperienceCommuneTable = getLinkExperienceCommune(metadata)
         LinkExperienceCommuneTable.create(checkfirst=True)
         mapper(LinkExperienceCommune, LinkExperienceCommuneTable)
         model.add('link_experience_commune',
-                   table=LinkExperienceCommuneTable,
-                   mapper_class=LinkExperienceCommune)
+                  table=LinkExperienceCommuneTable,
+                  mapper_class=LinkExperienceCommune)
 
-
-
+## table experiencemaj > versionning ##
+        experienceMajTable = getAllExperienceMaj(metadata)
+        experienceMajTable.create(checkfirst=True)
+        mapper(ExperienceMaj, experienceMajTable,
+               properties={'clps_proprio': relation(Clps, uselist=False)})
+        model.add('experience_maj',
+                  table=experienceMajTable,
+                  mapper_class=ExperienceMaj)
 
 ## table rechercheLog ##
         rechercheLogTable = getAllRechercheLog(metadata)
         rechercheLogTable.create(checkfirst=True)
         mapper(RechercheLog, rechercheLogTable)
         model.add('rechercheLog', table=rechercheLogTable, mapper_class=Recit)
-
 
         metadata.create_all()
         return model

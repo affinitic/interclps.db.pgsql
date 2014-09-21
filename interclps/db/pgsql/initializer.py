@@ -349,13 +349,15 @@ class InterClpsModel(object):
         experienceTable.create(checkfirst=True)
         mapper(Experience, experienceTable,
                properties={'institution_porteur': relation(LinkExperienceInstitutionPorteur, lazy=True),
-                           'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True),
-                           'clpsOrigine': relation(Clps,
-                                                   uselist=False)})
+                           'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True)})
+                           #'clpsOrigine': relation(Clps,
+                           #                        uselist=False)})
                            #'institution_ressource': relation(LinkExperienceInstitutionRessource, lazy=True),
                            #'ressource': relation(LinkExperienceRessource, lazy=True)
 
-        model.add('experience', table=experienceTable, mapper_class=Experience)
+        model.add('experience',
+                  table=experienceTable,
+                  mapper_class=Experience)
 
         LinkExperienceInstitutionPorteurTable = getLinkExperienceInstitutionPorteur(metadata)
         LinkExperienceInstitutionPorteurTable.create(checkfirst=True)
@@ -383,8 +385,7 @@ class InterClpsModel(object):
 
         LinkExperienceClpsProprioTable = getLinkExperienceClpsProprio(metadata)
         LinkExperienceClpsProprioTable.create(checkfirst=True)
-        mapper(LinkExperienceClpsProprio, LinkExperienceClpsProprioTable,
-               properties={'clps_proprio': relation(Clps, lazy=True)})
+        mapper(LinkExperienceClpsProprio, LinkExperienceClpsProprioTable)
         model.add('link_experience_clps_proprio',
                   table=LinkExperienceClpsProprioTable,
                   mapper_class=LinkExperienceClpsProprio)

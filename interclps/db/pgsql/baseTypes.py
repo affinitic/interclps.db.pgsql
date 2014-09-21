@@ -11,188 +11,192 @@ from z3c.sqlalchemy.mapper import MappedClassBase
 
 
 class Province(MappedClassBase):
-    c = None
+    pass
 
 
 class Commune(MappedClassBase):
-    c = None
+    pass
 
 
 class Clps(MappedClassBase):
-    c = None
+    pass
 
 
 class MotCle(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkMotCleTheme(MappedClassBase):
-    c = None
+    pass
 
 
 class Theme(MappedClassBase):
-    c = None
+    pass
 
 
 class Public(MappedClassBase):
-    c = None
+    pass
 
 
 class MilieuDeVie(MappedClassBase):
-    c = None
+    pass
 
 
 class PlateForme(MappedClassBase):
-    c = None
+    pass
 
 
 class SousPlateForme(MappedClassBase):
-    c = None
+    pass
 
 
 class Institution(MappedClassBase):
-    c = None
+    pass
 
 
 class InstitutionType(MappedClassBase):
-    c = None
+    pass
 
 
 class InstitutionAssuetudeIntervention(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionAssuetudeIntervention(MappedClassBase):
-    c = None
+    pass
 
 
 class InstitutionAssuetudeActiviteProposee(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionAssuetudeActiviteProposeePublic(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionAssuetudeActiviteProposeePro(MappedClassBase):
-    c = None
+    pass
 
 
 class InstitutionAssuetudeThematique(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionAssuetudeThematique(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionCommuneCouverte(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionSousPlateForme(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkInstitutionClpsProprio(MappedClassBase):
-    c = None
+    pass
 
 
 class Support(MappedClassBase):
-    c = None
+    pass
 
 
 class Ressource(MappedClassBase):
-    c = None
+    pass
 
 
 class Experience(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkRessourceMotCle(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkRessourceSupport(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkRessourceTheme(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkRessourcePublic(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkRessourceClpsProprio(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkRessourceClpsDispo(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceCommune(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceInstitutionPorteur(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceInstitutionPartenaire(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceInstitutionRessource(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceRessource(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceMilieuDeVie(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceSousPlateForme(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceMotCle(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceTheme(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperiencePublic(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceCommune(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkExperienceClpsProprio(MappedClassBase):
-    c = None
+    pass
 
 
 class Recit(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkOutilRecit(MappedClassBase):
-    c = None
+    pass
 
 
 class Auteur(MappedClassBase):
-    c = None
+    pass
 
 
 class RechercheLog(MappedClassBase):
-    c = None
+    pass
+
+
+class ExperienceMaj(MappedClassBase):
+    pass

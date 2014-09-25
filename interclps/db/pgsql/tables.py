@@ -274,7 +274,7 @@ def getAllAssuetudeInterventionForInstitution(metadata):
     return assuetudeInterventionForInstitution
 
 
-def getLinkInstitutionAssuetudeIntervention(metadata):
+def getLinkAssuetudeInterventionForInstitution(metadata):
     autoload = False
     if metadata.bind.has_table('link_institution_assuetude_intervention'):
         autoload = True
@@ -311,7 +311,7 @@ def getAllAssuetudeActiviteProposeeForInstitution(metadata):
     return assuetudeActiviteProposeeForInstitution
 
 
-def getLinkInstitutionAssuetudeActiviteProposeePublic(metadata):
+def getLinkAssuetudeActiviteProposeeForInstitutionPublic(metadata):
     autoload = False
     if metadata.bind.has_table('link_institution_assuetude_activite_proposee_public'):
         autoload = True
@@ -327,7 +327,7 @@ def getLinkInstitutionAssuetudeActiviteProposeePublic(metadata):
     return linkInstitutionAssuetudeActiviteProposeePublic
 
 
-def getLinkInstitutionAssuetudeActiviteProposeePro(metadata):
+def getLinkAssuetudeActiviteProposeeForInstitutionPro(metadata):
     autoload = False
     if metadata.bind.has_table('link_institution_assuetude_activite_proposee_pro'):
         autoload = True
@@ -343,7 +343,7 @@ def getLinkInstitutionAssuetudeActiviteProposeePro(metadata):
     return linkInstitutionAssuetudeActiviteProposeePro
 
 
-def getAllAssuetudeThematiqueForInstitution(metadata):
+def getAllAssuetudeThemeForInstitution(metadata):
     autoload = False
     if metadata.bind.has_table('assuetude_thematique_for_institution'):
         autoload = True
@@ -362,7 +362,7 @@ def getAllAssuetudeThematiqueForInstitution(metadata):
     return assuetudeThematiqueForInstitution
 
 
-def getLinkInstitutionAssuetudeThematique(metadata):
+def getLinkAssuetudeThemeForInstitution(metadata):
     autoload = False
     if metadata.bind.has_table('link_institution_assuetude_thematique'):
         autoload = True
@@ -392,22 +392,6 @@ def getLinkInstitutionCommuneCouverte(metadata):
     return linkInstitutionCommuneCouverte
 
 
-def getLinkInstitutionSousPlateForme(metadata):
-    autoload = False
-    if metadata.bind.has_table('link_institution_sousplateforme'):
-        autoload = True
-    linkInstitutionSousPlateForme = Table('link_institution_sousplateforme', metadata,
-                                          Column('institution_fk', Integer(),
-                                                 ForeignKey('institution.institution_pk'),
-                                                 primary_key=True),
-                                          Column('sousplateforme_fk', Integer(),
-                                                 ForeignKey('sousplateforme.sousplateforme_pk'),
-                                                 primary_key=True),
-                                          useexisting=True,
-                                          autoload=autoload)
-    return linkInstitutionSousPlateForme
-
-
 def getLinkInstitutionClpsProprio(metadata):
     autoload = False
     if metadata.bind.has_table('link_institution_clps_proprio'):
@@ -422,6 +406,22 @@ def getLinkInstitutionClpsProprio(metadata):
                                        useexisting=True,
                                        autoload=autoload)
     return linkInstitutionClpsProprio
+
+
+def getLinkInstitutionSousPlateForme(metadata):
+    autoload = False
+    if metadata.bind.has_table('link_institution_sousplateforme'):
+        autoload = True
+    linkInstitutionSousPlateForme = Table('link_institution_sousplateforme', metadata,
+                                          Column('institution_fk', Integer(),
+                                                 ForeignKey('institution.institution_pk'),
+                                                 primary_key=True),
+                                          Column('sousplateforme_fk', Integer(),
+                                                 ForeignKey('sousplateforme.sousplateforme_pk'),
+                                                 primary_key=True),
+                                          useexisting=True,
+                                          autoload=autoload)
+    return linkInstitutionSousPlateForme
 
 
 def getAllSupport(metadata):
@@ -634,6 +634,9 @@ def getAllExperience(metadata):
                        Column('experience_auteur_login', Text()),
                        Column('experience_auteur_fk', Integer(),
                               ForeignKey('auteur.auteur_pk'),
+                              nullable=False),
+                       Column('experience_clps_proprio_fk', Integer(),
+                              ForeignKey('clps.clps_pk'),
                               nullable=False),
                        autoload=autoload,
                        useexisting=True)

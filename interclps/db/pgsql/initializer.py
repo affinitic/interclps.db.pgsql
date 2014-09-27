@@ -350,20 +350,6 @@ class InterClpsModel(object):
         model.add('recit', table=recitTable, mapper_class=Recit)
 
 ## table experience ##
-        experienceTable = getAllExperience(metadata)
-        experienceTable.create(checkfirst=True)
-        mapper(Experience, experienceTable,
-               properties={'institution_porteur': relation(LinkExperienceInstitutionPorteur, lazy=True),
-                           'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True),
-                           'clpsOrigine': relation(Clps,
-                                                   uselist=False)})
-                           #'institution_ressource': relation(LinkExperienceInstitutionRessource, lazy=True),
-                           #'ressource': relation(LinkExperienceRessource, lazy=True)
-
-        model.add('experience',
-                  table=experienceTable,
-                  mapper_class=Experience)
-
         LinkExperienceInstitutionPorteurTable = getLinkExperienceInstitutionPorteur(metadata)
         LinkExperienceInstitutionPorteurTable.create(checkfirst=True)
         mapper(LinkExperienceInstitutionPorteur, LinkExperienceInstitutionPorteurTable,
@@ -443,6 +429,21 @@ class InterClpsModel(object):
         model.add('link_experience_commune',
                   table=LinkExperienceCommuneTable,
                   mapper_class=LinkExperienceCommune)
+
+
+        experienceTable = getAllExperience(metadata)
+        experienceTable.create(checkfirst=True)
+        mapper(Experience, experienceTable,
+               properties={'institution_porteur': relation(LinkExperienceInstitutionPorteur, lazy=True),
+                           'institution_partenaire': relation(LinkExperienceInstitutionPartenaire, lazy=True),
+                           'clpsOrigine': relation(Clps,
+                                                   uselist=False)})
+                           #'institution_ressource': relation(LinkExperienceInstitutionRessource, lazy=True),
+                           #'ressource': relation(LinkExperienceRessource, lazy=True)
+
+        model.add('experience',
+                  table=experienceTable,
+                  mapper_class=Experience)
 
 ## table experiencemaj > versionning ##
         experienceMajTable = getAllExperienceMaj(metadata)

@@ -299,11 +299,6 @@ class InterClpsModel(object):
         ressourceTable = getAllRessource(metadata)
         ressourceTable.create(checkfirst=True)
         mapper(Ressource, ressourceTable)
-                #properties={'support': relation(Support,
-                #                                uselist=False,
-                #                                backref=backref('ressource',
-                #                                                lazy=True,
-                #                                                uselist=False))})
         model.add('ressource', table=ressourceTable, mapper_class=Ressource)
 
         LinkRessourceSupportTable = getLinkRessourceSupport(metadata)
